@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Honkbal Chatbot</h2>
+<input type="text" id="question" placeholder="Typ je vraag hier" size="50">
+<button onclick="ask()">Stel vraag</button>
+<p id="answer"></p>
+
+<script>
+async function ask() {
+    const question = document.getElementById("question").value;
+    const res = await fetch("https://JOUW_CLOUDRUN_URL.a.run.app/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+    });
+    const data = await res.json();
+    document.getElementById("answer").innerText = data.answer;
+}
+</script>
+</body>
+</html>
